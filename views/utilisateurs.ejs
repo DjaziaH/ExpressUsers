@@ -1,0 +1,47 @@
+<h1>Liste des utilisateurs</h1> 
+<hr> 
+<br>
+<% if ( utilisateurs.length > 0) { %>
+    
+        <table border="1">
+            <thead>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Pwd</th>
+            </thead>
+            <tbody>
+                    <% utilisateurs.forEach(function(utilisateur) { %>
+                        <tr>
+                            <td><%= utilisateur.id %></td>
+                            <td><%= utilisateur.login %></td>
+                            <td><%= utilisateur.pwd %></td>
+                            <td>
+                                <form action="/utilisateurs/modifier" method="POST">
+                                    <input type="id" name="id" value="<%= utilisateur.id %>" hidden>
+                                    <label for="#login">Login</label>
+                                    <input id="login" name="login" type="text" value="<%= utilisateur.login %>">
+                                    <label for="#pwd">Mot de passe</label>
+                                    <input id="pwd" name="pwd" type="text" value="<%= utilisateur.pwd %>">
+                                    <input type="submit" value="Modifier">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/utilisateurs/suprimer" method="post">
+                                    <input type="id" name="id" value="<%= utilisateur.id %>" hidden>
+                                    <input type="submit" value="Suprimer">
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>  
+            
+            </tbody>
+        </table>
+    
+    <%} else { %>
+    <h5> Pas d'utilisateurs pour le moment ! </h5>
+    <% } %>
+<br>
+<hr>
+<br>
+<br>
+<a href='/utilisateurs/ajout'>Ajouter</a>
